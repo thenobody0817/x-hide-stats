@@ -10,6 +10,8 @@
 // @match        https://mobile.twitter.com/*
 // @match        https://mobile.x.com/*
 // @run-at       document-start
+// @downloadURL  https://raw.githubusercontent.com/thenobody0817/x-hide-stats/main/x-hide-stats.user.js
+// @updateURL    https://raw.githubusercontent.com/thenobody0817/x-hide-stats/main/x-hide-stats.user.js
 // @grant        GM_getValue
 // @grant        GM_setValue
 // @grant        GM_registerMenuCommand
