@@ -1,0 +1,231 @@
+<!--
+  Structural fixture for x-hide-stats.
+
+  Hand-written from the shape of x.com's markup, so that the repository
+  carries no third-party or personal data.  Two front-ends are reproduced,
+  because x.com serves both:
+
+    classic  <button data-testid="reply"> ... <span data-testid="app-text-transition-container">15</span>
+    2026     <div data-engagement-action="reply"> ... <span class="x-animated-count-visual">4K</span>
+
+  Class names below are deliberately meaningless.  The classic front-end
+  rotates its hashed classes on every deploy, so a script that depends on
+  them breaks without warning; the script under test must not.
+-->
+
+<section data-fixture="classic">
+  <article data-testid="tweet">
+    <div role="group" aria-label="15 replies, 1003 reposts, 8784 likes, 730 bookmarks, 89532 views" class="css-aaaaaa r-bbbbbb">
+      <div class="css-aaaaaa r-cccccc">
+        <button aria-label="15 Replies. Reply" role="button" class="css-dddddd r-eeeeee" data-testid="reply" type="button">
+          <div dir="ltr" class="css-fffff r-gggggg">
+            <div class="css-aaaaaa r-hhhhhh">
+              <div class="css-aaaaaa r-iiiiii"></div>
+              <svg viewBox="0 0 24 24" aria-hidden="true" class="r-jjjjjj"><g><path d="M1 1h22v22H1z"></path></g></svg>
+            </div>
+            <div class="css-aaaaaa r-1udh08x">
+              <span data-testid="app-text-transition-container" style="transition-property: transform;">
+                <span class="css-kkkkkk r-llllll"><span class="css-mmmmmm r-nnnnnn">15</span></span>
+              </span>
+            </div>
+          </div>
+        </button>
+      </div>
+      <div class="css-aaaaaa r-cccccc">
+        <button aria-expanded="false" aria-haspopup="menu" aria-label="1003 reposts. Repost" role="button" class="css-dddddd r-eeeeee" data-testid="retweet" type="button">
+          <div dir="ltr" class="css-fffff r-gggggg">
+            <div class="css-aaaaaa r-hhhhhh">
+              <div class="css-aaaaaa r-iiiiii"></div>
+              <svg viewBox="0 0 24 24" aria-hidden="true" class="r-jjjjjj"><g><path d="M2 2h20v20H2z"></path></g></svg>
+            </div>
+            <div class="css-aaaaaa r-1udh08x">
+              <span class="css-kkkkkk r-oooooo"><span class="css-mmmmmm r-nnnnnn">1K</span></span>
+              <span data-testid="app-text-transition-container" style="transition-property: transform;">
+                <span class="css-kkkkkk r-llllll"><span class="css-mmmmmm r-nnnnnn">1K</span></span>
+              </span>
+            </div>
+          </div>
+        </button>
+      </div>
+      <div class="css-aaaaaa r-cccccc">
+        <button aria-label="8784 Likes. Like" role="button" class="css-dddddd r-eeeeee" data-testid="like" type="button">
+          <div dir="ltr" class="css-fffff r-gggggg">
+            <div class="css-aaaaaa r-hhhhhh">
+              <div class="css-aaaaaa r-iiiiii"></div>
+              <svg viewBox="0 0 24 24" aria-hidden="true" class="r-jjjjjj"><g><path d="M3 3h18v18H3z"></path></g></svg>
+            </div>
+            <div class="css-aaaaaa r-1udh08x">
+              <span data-testid="app-text-transition-container" style="transition-property: transform;">
+                <span class="css-kkkkkk r-llllll"><span class="css-mmmmmm r-nnnnnn">8.7K</span></span>
+              </span>
+            </div>
+          </div>
+        </button>
+      </div>
+      <div class="css-aaaaaa r-cccccc">
+        <button aria-label="730 Bookmarks. Bookmark" role="button" class="css-dddddd r-eeeeee" data-testid="bookmark" type="button">
+          <div dir="ltr" class="css-fffff r-gggggg">
+            <div class="css-aaaaaa r-hhhhhh">
+              <div class="css-aaaaaa r-iiiiii"></div>
+              <svg viewBox="0 0 24 24" aria-hidden="true" class="r-jjjjjj"><g><path d="M4 4h16v16H4z"></path></g></svg>
+            </div>
+            <div class="css-aaaaaa r-1udh08x">
+              <span data-testid="app-text-transition-container" style="transition-property: transform;">
+                <span class="css-kkkkkk r-llllll"><span class="css-mmmmmm r-nnnnnn">730</span></span>
+              </span>
+            </div>
+          </div>
+        </button>
+      </div>
+      <div class="css-aaaaaa r-cccccc">
+        <a href="/someone/status/1234567890/analytics" aria-label="89532 views. View post analytics" role="link" class="css-pppppp r-qqqqqq">
+          <div dir="ltr" class="css-fffff r-gggggg">
+            <div class="css-aaaaaa r-hhhhhh">
+              <div class="css-aaaaaa r-iiiiii"></div>
+              <svg viewBox="0 0 24 24" aria-hidden="true" class="r-jjjjjj"><g><path d="M5 5h14v14H5z"></path></g></svg>
+            </div>
+            <div class="css-aaaaaa r-1udh08x">
+              <span data-testid="app-text-transition-container" style="transition-property: transform;">
+                <span class="css-kkkkkk r-llllll"><span class="css-mmmmmm r-nnnnnn">89K</span></span>
+              </span>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="css-aaaaaa r-rrrrrr">
+        <button aria-label="Share post" role="button" class="css-dddddd r-eeeeee" type="button">
+          <div dir="ltr" class="css-fffff r-gggggg">
+            <div class="css-aaaaaa r-hhhhhh">
+              <div class="css-aaaaaa r-iiiiii"></div>
+              <svg viewBox="0 0 24 24" aria-hidden="true" class="r-jjjjjj"><g><path d="M6 6h12v12H6z"></path></g></svg>
+            </div>
+          </div>
+        </button>
+      </div>
+    </div>
+  </article>
+
+  <div data-fixture="classic-permalink-views">
+    <div class="css-ssssss r-tttttt">
+      <div dir="ltr" class="css-fffff r-gggggg">
+        <span class="css-mmmmmm r-uuuuuu">
+          <div class="css-aaaaaa r-1udh08x">
+            <span data-testid="app-text-transition-container" style="transition-property: transform;">
+              <span class="css-kkkkkk r-llllll"><span class="css-mmmmmm r-nnnnnn">89.5K</span></span>
+            </span>
+          </div>
+          <span class="css-mmmmmm r-vvvvvv"><span class="css-mmmmmm r-nnnnnn">Views</span></span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div data-fixture="classic-profile-stats">
+    <a href="/someone/following" dir="ltr" role="link" class="css-fffff r-gggggg">
+      <span class="css-mmmmmm r-wwwwww"><span class="css-mmmmmm r-nnnnnn">3</span></span>
+      <span class="css-mmmmmm r-vvvvvv"><span class="css-mmmmmm r-nnnnnn">Following</span></span>
+    </a>
+    <a href="/someone/verified_followers" dir="ltr" role="link" class="css-fffff r-gggggg">
+      <span class="css-mmmmmm r-wwwwww"><span class="css-mmmmmm r-nnnnnn">12.5M</span></span>
+      <span class="css-mmmmmm r-vvvvvv"><span class="css-mmmmmm r-nnnnnn">Followers</span></span>
+    </a>
+    <div dir="ltr" class="css-fffff r-1udh08x">31K posts</div>
+  </div>
+</section>
+
+<section data-fixture="2026">
+  <article>
+    <div class="-mx-2 flex h-5 min-h-5 items-center justify-between">
+      <div class="min-w-0 flex-1" data-engagement-action="reply">
+        <a class="x-link group x-engagement-button" aria-label="Reply" href="/compose/post?in_reply_to=1">
+          <span class="x-engagement-pill before:bg-brand/10 h-9 px-2.5">
+            <svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" aria-hidden="true"><use href="#icon-reply-stroke"></use></svg>
+            <span class="inline-flex overflow-hidden" style="opacity:1;width:auto;transform:none">
+              <span class="inline-flex tabular-nums text-subtext2 ps-1">
+                <span class="x-animated-count-visual" dir="ltr">4K</span>
+              </span>
+            </span>
+          </span>
+        </a>
+      </div>
+      <div class="min-w-0 flex-1" data-engagement-action="retweet">
+        <button type="button" aria-haspopup="menu" aria-expanded="false" aria-label="Repost" class="group x-engagement-button">
+          <span class="x-engagement-pill before:bg-green-500/10 h-9 px-2.5">
+            <svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" aria-hidden="true"><use href="#icon-retweet-stroke"></use></svg>
+            <span class="inline-flex overflow-hidden" style="opacity:1;width:auto;transform:none">
+              <span class="inline-flex tabular-nums text-subtext2 ps-1">
+                <span class="x-animated-count-visual" dir="ltr">20</span>
+              </span>
+            </span>
+          </span>
+        </button>
+      </div>
+      <div class="min-w-0 flex-1" data-engagement-action="like">
+        <button aria-label="Like" class="group x-engagement-button">
+          <span class="x-engagement-pill before:bg-magenta-500/10 h-9 px-2.5">
+            <svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" aria-hidden="true"><use href="#icon-heart-stroke"></use></svg>
+            <span class="inline-flex overflow-hidden" style="opacity:1;width:auto;transform:none">
+              <span class="inline-flex tabular-nums text-subtext2 ps-1">
+                <span class="x-animated-count-visual" dir="ltr">265</span>
+              </span>
+            </span>
+          </span>
+        </button>
+      </div>
+      <div class="min-w-0 flex-1" data-engagement-action="generic">
+        <button aria-label="View count" class="group x-engagement-button">
+          <span class="x-engagement-pill before:bg-brand/10 h-9 px-2.5">
+            <svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" aria-hidden="true"><use href="#icon-bar-chart"></use></svg>
+            <span class="inline-flex overflow-hidden" style="opacity:1;width:auto;transform:none">
+              <span class="inline-flex tabular-nums text-subtext2 ps-1">
+                <span class="x-animated-count-visual" dir="ltr">8K</span>
+              </span>
+            </span>
+          </span>
+        </button>
+      </div>
+      <div class="min-w-0 flex-1" data-engagement-action="bookmark">
+        <button aria-label="Bookmark" class="group x-engagement-button">
+          <span class="x-engagement-pill before:bg-brand/10 h-9 px-2.5">
+            <svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" aria-hidden="true"><use href="#icon-bookmark-stroke"></use></svg>
+            <span class="inline-flex overflow-hidden" style="opacity:1;width:auto;transform:none">
+              <span class="inline-flex tabular-nums text-subtext2 ps-1">
+                <span class="x-animated-count-visual" dir="ltr">207</span>
+              </span>
+            </span>
+          </span>
+        </button>
+      </div>
+      <div data-engagement-action="share">
+        <button type="button" aria-haspopup="menu" aria-label="Share" class="group x-engagement-button">
+          <span class="x-engagement-pill before:bg-brand/10 h-9 px-2.5">
+            <svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" aria-hidden="true"><use href="#icon-outgoing"></use></svg>
+          </span>
+        </button>
+      </div>
+    </div>
+  </article>
+
+  <div data-fixture="2026-permalink-views">
+    <a class="rounded-xs x-link text-subtext1 font-chirp text-secondary inline-flex items-center gap-1" href="/someone/status/1234567890" data-status="active" aria-current="page">
+      <div class="max-w-full text-[length:inherit] font-bold text-primary">165.6K</div>
+      <div class="max-w-full text-[length:inherit] font-normal text-secondary">Views</div>
+    </a>
+  </div>
+
+  <div data-fixture="2026-profile-stats">
+    <a class="rounded-xs x-link" href="/someone/following">
+      <div class="max-w-full text-body font-normal text-primary">
+        <span class="max-w-full text-subtext1 font-bold text-primary">3</span>
+        <span class="max-w-full text-subtext1 font-normal text-secondary">Following</span>
+      </div>
+    </a>
+    <a class="rounded-xs x-link" href="/someone/verified_followers">
+      <div class="max-w-full text-body font-normal text-primary">
+        <span class="max-w-full text-subtext1 font-bold text-primary">12.5M</span>
+        <span class="max-w-full text-subtext1 font-normal text-secondary">Followers</span>
+      </div>
+    </a>
+    <div class="max-w-full text-subtext2 font-normal text-secondary">31K<!-- --> <!-- -->posts</div>
+  </div>
+</section>

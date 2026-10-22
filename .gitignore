@@ -1,0 +1,4 @@
+# Local capture scratch space.  Raw x.com pages contain real handles and tweet
+# text, so they are never committed; only the sanitised fixture is.
+test/fixtures/raw/
+*.local.html

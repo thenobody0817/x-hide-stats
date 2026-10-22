@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>x-hide-stats harness</title>
+<script>
+// The userscript is loaded dynamically so that the negative control
+// ("?noscript=1") can run the very same checks without it.
+(function () {
+  if (new URLSearchParams(location.search).get('noscript') === '1') return;
+  var s = document.createElement('script');
+  s.src = '../x-hide-stats.user.js';
+  document.head.appendChild(s);
+})();
+</script>
+</head>
+<body>
+<h1>x-hide-stats harness</h1>
+<p>Fixture: <span id="fixture-name">none</span></p>
+<div id="stage"></div>
+<pre id="results"></pre>
+<script>
+(function () {
+  var params = new URLSearchParams(location.search);
+  var fixture = params.get('fixture') || 'x-dom';
+  var COUNT_ONLY = /^\s*\d[\d.,]*\s*[KMB]?\s*$/;
+
+  function isHidden(el) {
+    for (var node = el; node && node !== document.body; node = node.parentElement) {
+      if (getComputedStyle(node).display === 'none') return true;
+    }
+    return false;
+  }
+
+  // Text a sighted user would actually see, ignoring hidden subtrees.
+  function visibleText(el) {
+    var out = '';
+    var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
+    var node;
+    while ((node = walker.nextNode())) {
+      if (isHidden(node.parentElement)) continue;
+      out += node.nodeValue;
+    }
+    return out.replace(/\s+/g, ' ').trim();
+  }
+
+  function visibleCountLeaves(root, selector) {
+    var out = [];
+    var containers = root.querySelectorAll(selector);
+    for (var i = 0; i < containers.length; i++) {
+      var leaves = containers[i].querySelectorAll('span, div');
+      for (var j = 0; j < leaves.length; j++) {
+        var leaf = leaves[j];
+        if (leaf.children.length !== 0) continue;
+        if (!COUNT_ONLY.test(leaf.textContent || '')) continue;
+        if (!isHidden(leaf)) out.push(leaf.textContent.trim());
+      }
+    }
+    return out;
+  }
+
+  function labelLeaks(root, selector) {
+    var out = [];
+    var els = root.querySelectorAll(selector);
+    for (var i = 0; i < els.length; i++) {
+      var label = els[i].getAttribute('aria-label') || '';
+      if (/\d/.test(label)) out.push(label);
+    }
+    return out;
+  }
+
+  function report() {
+    var stage = document.getElementById('stage');
+    var result = { fixture: fixture, checks: [] };
+
+    function check(name, value, expected) {
+      result.checks.push({
+        name: name,
+        ok: JSON.stringify(value) === JSON.stringify(expected),
+        got: value,
+        expected: expected,
+      });
+    }
+
+    var legacyButtons = 'button[data-testid="reply"],button[data-testid="retweet"],button[data-testid="unretweet"],button[data-testid="like"],button[data-testid="unlike"],button[data-testid="bookmark"],button[data-testid="removeBookmark"]';
+    var newActions = 'div[data-engagement-action="reply"],div[data-engagement-action="retweet"],div[data-engagement-action="like"],div[data-engagement-action="bookmark"]';
+
+    check('classic engagement counts visible', visibleCountLeaves(stage, legacyButtons), []);
+    check('2026 engagement counts visible', visibleCountLeaves(stage, newActions), []);
+    check('classic engagement aria-labels with digits', labelLeaks(stage, legacyButtons), []);
+    check('views link aria-labels with digits', labelLeaks(stage, 'a[href$="/analytics"]'), []);
+    check('action group aria-labels with digits', labelLeaks(stage, '[role="group"]'), []);
+
+    var profileLinks = stage.querySelectorAll('a[href$="/followers"],a[href$="/following"],a[href$="/verified_followers"]');
+    var visibleProfile = [];
+    for (var i = 0; i < profileLinks.length; i++) {
+      var leaves = profileLinks[i].querySelectorAll('span, div');
+      for (var j = 0; j < leaves.length; j++) {
+        var leaf = leaves[j];
+        if (leaf.children.length !== 0) continue;
+        if (!COUNT_ONLY.test(leaf.textContent || '')) continue;
+        if (!isHidden(leaf)) visibleProfile.push(leaf.textContent.trim());
+      }
+    }
+    check('profile follower/following counts visible', visibleProfile, []);
+
+    var words = /^\s*\d[\d.,]*\s*[KMB]?\s*(followers?|following|posts?|tweets?|views?|impressions?)\s*$/i;
+    var visibleWords = [];
+    var all = stage.querySelectorAll('div, span, a');
+    for (var k = 0; k < all.length; k++) {
+      var el = all[k];
+      var text = visibleText(el);
+      if (text.length > 40) continue;
+      if (!words.test(text)) continue;
+      if (el.closest('a[href$="/followers"],a[href$="/following"],a[href$="/verified_followers"]')) continue;
+      visibleWords.push(text);
+    }
+    check('count+label cells visible', visibleWords, []);
+
+    result.passed = result.checks.filter(function (c) { return c.ok; }).length;
+    result.total = result.checks.length;
+    document.getElementById('results').textContent = JSON.stringify(result, null, 2);
+    document.getElementById('fixture-name').textContent = fixture;
+    window.__harnessResult = result;
+  }
+
+  fetch('fixtures/' + fixture + '.html')
+    .then(function (r) { return r.text(); })
+    .then(function (text) {
+      var stage = document.getElementById('stage');
+      stage.innerHTML = text;
+      setTimeout(report, 500);
+    })
+    .catch(function (e) {
+      document.getElementById('results').textContent = 'load error: ' + e;
+    });
+})();
+</script>
+</body>
+</html>
